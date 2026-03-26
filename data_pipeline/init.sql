@@ -1,0 +1,22 @@
+CREATE TABLE IF NOT EXISTS cars_raw (
+    id INTEGER PRIMARY KEY,
+    url TEXT NOT NULL,
+    brand VARCHAR(255),
+    model VARCHAR(255),
+    year INTEGER,
+    mileage INTEGER,
+    power INTEGER,
+    price INTEGER,
+    seats INTEGER,
+    fixed_price BOOLEAN,
+    fuel VARCHAR(64),
+    color VARCHAR(128),
+    registered VARCHAR(128),
+    dmfw VARCHAR(64),
+    origin VARCHAR(64),
+    country_origin VARCHAR(64),
+    date_posted DATE,
+    emmision VARCHAR(64),
+    transmission VARCHAR(64),
+    bodywork VARCHAR(64)
+);

@@ -57,8 +57,7 @@ async def get_car(session, url, sem):
             return {}
 
 # API endpoint
-@app.route('/get_page/<page_number>', methods=['GET'])
-async def get_page(page_number):
+async def _fetch_page(page_number):
     base_url = 'https://www.polovniautomobili.com/auto-oglasi/pretraga?page='
     filter = '&sort=renewDate_desc&city_distance=0&showOldNew=all&without_price=1'
 
@@ -69,15 +68,19 @@ async def get_page(page_number):
             html = await resp.text()
             soup = BeautifulSoup(html, 'lxml')
 
-            listings = soup.select('.ordinaryClassified')
+            listings = soup.select('article.classified[data-classifiedid]')
             links = ['https://www.polovniautomobili.com' + l.find('a', href=True)['href'] for l in listings]
 
-            # semaphore to limit concurrency (e.g., 10 at a time)
             sem = asyncio.Semaphore(10)
 
             tasks = [get_car(session, link, sem) for link in links]
             cars = await asyncio.gather(*tasks)
-            return jsonify(cars)
+            return cars
+
+@app.route('/get_page/<page_number>', methods=['GET'])
+def get_page(page_number):
+    cars = asyncio.run(_fetch_page(page_number))
+    return jsonify(cars)
 
 if __name__ == '__main__':
     app.run(debug=True)

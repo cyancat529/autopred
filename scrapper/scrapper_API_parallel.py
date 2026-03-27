@@ -19,8 +19,6 @@ class CarScrapper:
     
     @staticmethod
     def get_car(url):
-        resp = requests.get(url, headers={'User-Agent': 'MyScraper'})
-        resp.raise_for_status()
         car_page = BeautifulSoup(resp.text, 'html.parser')
 
         data = car_page.find_all(class_='infoBox')[0]

@@ -32,10 +32,7 @@ except OSError as e:
 cars = []
 
 for i in range(1,fin_page + 1):
-    response = requests.get(url+str(i))
-
-    print(response.status_code)
-    print(response.text[:500])                                                
+    response = requests.get(url+str(i))                                 
     data = response.json()   
 
     # Step 2: Convert response to JSON

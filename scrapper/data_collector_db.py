@@ -34,6 +34,10 @@ cars = []
 for i in range(1,fin_page + 1):
     response = requests.get(url+str(i))
 
+    print(response.status_code)
+    print(response.text[:500])                                                
+    data = response.json()   
+
     # Step 2: Convert response to JSON
     data = response.json()
 
@@ -48,7 +52,7 @@ cars_raw_df = pd.concat(cars, ignore_index=True)
 
 # Step 5: Initialize DB Connection
 
-engine = create_engine('postgresql://admin:admin@localhost:5432/autopred', echo = True)
+engine = create_engine('postgresql://admin:admin@db:5432/autopred', echo = True)
 
 meta = MetaData()
 

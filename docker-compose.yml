@@ -7,8 +7,8 @@ services:
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: autopred
     volumes:
-      - ./data_pipeline/init.sql:/docker-entrypoint-initdb.d/init.sql
-      - ./data_pipeline/pgdata:/var/lib/postgresql/    
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./database/pgdata:/var/lib/postgresql/    
     ports:
       - "5432:5432"
   scrapper:

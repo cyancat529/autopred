@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS cars_raw (
     year INTEGER,
     mileage INTEGER,
     power INTEGER,
+    volume INTEGER,
     price INTEGER,
     seats INTEGER,
     fixed_price BOOLEAN,
@@ -18,5 +19,6 @@ CREATE TABLE IF NOT EXISTS cars_raw (
     date_posted DATE,
     emmision VARCHAR(64),
     transmission VARCHAR(64),
-    bodywork VARCHAR(64)
+    bodywork VARCHAR(64),
+    door INTEGER
 );
